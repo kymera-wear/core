@@ -1,7 +1,6 @@
 const chai = require('chai');
-const { Display } = require('../lib/display');
 const sinon = require('sinon');
-
+const { Display } = require('../src/display');
 const { expect } = chai;
 
 chai.use(require('chai-as-promised'));

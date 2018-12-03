@@ -4,19 +4,23 @@ const appRoot = require('app-root-path').toString();
 
 liblouis.enableOnDemandTableLoading(path.join(appRoot, 'node_modules', 'liblouis-build', 'tables'));
 
+/** @class */
 class Display {
-  constructor(points) {
-    this.points = points;
+  /**
+   * @constructs
+   * @param {Gpio[]} pins  An array of GPIO pins
+   */
+  constructor(pins) {
+    this.pins = pins;
     this.tables = 'tables/unicode.dis,tables/en-us-comp6.ctb';
   }
 
   /**
+   * Convert a Braille codepoint to an array of bits.
+   *
    * @private
-   * Codepoint dot positions are as follows:
-   * 1 4
-   * 2 5
-   * 3 6
-   * 7 8
+   * @param {String} codepoint  A Braille codepoint
+   * @returns {Number[]}  An array of bits
    */
   codepointBitArray(codepoint) {
     const code = codepoint.charCodeAt(0) - 0x2800;
@@ -29,13 +33,23 @@ class Display {
     return data;
   }
 
-  /** @private */
+  /**
+   * Write a bit array to the display.
+   * @private
+   * @param {Number[]} bitArray  An array of bits
+   * @returns {Promise}  Promise to be resolved when done
+   */
   writeBitArray(bitArray) {
-    return Promise.all(this.points.map((point, index) =>
+    return Promise.all(this.pins.map((point, index) =>
       point.write(bitArray[index]),
     ));
   }
 
+  /**
+   * Write a string to the display.
+   * @param {String} string  String to display
+   * @returns {Promise}  Promise to be resolved when done
+   */
   write(string) {
     const translated = liblouis.translateString(this.tables, string);
     const writeBitArray = bitArray => this.writeBitArray(bitArray);
@@ -55,8 +69,12 @@ class Display {
     });
   }
 
+  /**
+   * Clear the display.
+   * @returns {Promise}  Promise to be resolved when done
+   */
   clear() {
-    return Promise.all(this.points.map(point => point.write(0)));
+    return Promise.all(this.pins.map(point => point.write(0)));
   }
 }
 
