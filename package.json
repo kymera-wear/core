@@ -1,0 +1,26 @@
+{
+  "name": "@kymera/core",
+  "version": "1.0.0",
+  "description": "Kymera core application",
+  "main": "app.js",
+  "repository": "https://gitlab.com/chameleoid/kymera/core.git",
+  "author": "*Kim Zick (rummik)",
+  "license": "MPL-2.0",
+  "private": false,
+  "scripts": {
+    "test": "mocha",
+    "test:watch": "nodemon --exec 'yarn test'"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "liblouis": "^0.4.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.7",
+    "sinon": "^7.1.1",
+    "sinon-chai": "^3.3.0"
+  },
+  "dependencies": {
+    "app-root-path": "^2.1.0"
+  }
+}
