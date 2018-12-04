@@ -57,7 +57,7 @@ class Display {
     const clear = () => this.clear();
 
     return new Promise(function next(resolve, reject, index = 0) {
-      writeBitArray(codepointBitArray(translated[index]));
+      writeBitArray(codepointBitArray(translated.charAt(index)));
 
       setTimeout(clear, 400);
 

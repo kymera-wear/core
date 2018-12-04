@@ -30,7 +30,7 @@ describe('Display', () => {
     clock.restore();
   });
 
-  describe('#codepointBitArray(point)', () => {
+  describe('#codepointBitArray(codepoint)', () => {
     it('should convert a codepoint into a bit array', () => {
       expect(display.codepointBitArray('⠭')).to.deep.equal([ 1, 0, 1, 1, 0, 1, 0, 0 ]);
       expect(display.codepointBitArray('⡇')).to.deep.equal([ 1, 1, 1, 0, 0, 0, 1, 0 ]);
