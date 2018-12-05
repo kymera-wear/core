@@ -27,6 +27,7 @@
     "sinon-chai": "^3.3.0"
   },
   "dependencies": {
-    "app-root-path": "^2.1.0"
+    "app-root-path": "^2.1.0",
+    "onoff": "^3.2.2"
   }
 }

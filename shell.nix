@@ -58,6 +58,7 @@ in
       export NODE_ENV=development
       export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${makeLibraryPath buildInputs}
       export FHS_PWD=$PWD
+      export CXXFLAGS=-I${pkgs.nodejs-8_x}/include/node
       exec ${chrootenv} ${fhs-init}
     '';
   }
