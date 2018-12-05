@@ -20,7 +20,6 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "jsdoc": "^3.5.5",
-    "liblouis": "^0.4.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.7",
     "sinon": "^7.1.1",
@@ -28,6 +27,7 @@
   },
   "dependencies": {
     "app-root-path": "^2.1.0",
+    "liblouis": "^0.4.0",
     "onoff": "^3.2.2"
   }
 }
