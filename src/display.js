@@ -8,10 +8,10 @@ liblouis.enableOnDemandTableLoading(path.join(appRoot, 'node_modules', 'liblouis
 class Display {
   /**
    * @constructs
-   * @param {Gpio[]} pins  An array of GPIO pins
+   * @param {Gpio[]} gpio  An array of GPIO objects
    */
-  constructor(pins) {
-    this.pins = pins;
+  constructor(gpio) {
+    this.gpio = gpio;
     this.tables = 'tables/unicode.dis,tables/en-us-comp6.ctb';
   }
 
@@ -40,8 +40,8 @@ class Display {
    * @returns {Promise}  Promise to be resolved when done
    */
   writeBitArray(bitArray) {
-    return Promise.all(this.pins.map((point, index) =>
-      point.write(bitArray[index]),
+    return Promise.all(this.gpio.map((pin, index) =>
+      pin.write(bitArray[index]),
     ));
   }
 
@@ -74,7 +74,7 @@ class Display {
    * @returns {Promise}  Promise to be resolved when done
    */
   clear() {
-    return Promise.all(this.pins.map(point => point.write(0)));
+    return Promise.all(this.gpio.map(pin => pin.write(0)));
   }
 }
 

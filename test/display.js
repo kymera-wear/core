@@ -8,7 +8,7 @@ chai.use(require('sinon-chai'));
 
 describe('Display', () => {
   before(() => {
-    points = [
+    gpio = [
       { write: sinon.stub() },
       { write: sinon.stub() },
       { write: sinon.stub() },
@@ -22,7 +22,7 @@ describe('Display', () => {
 
   beforeEach(() => {
     clock = sinon.useFakeTimers();
-    display = new Display(points);
+    display = new Display(gpio);
   });
 
   afterEach(() => {
@@ -41,14 +41,14 @@ describe('Display', () => {
     it('should write a bit array to the display', async () => {
       await display.writeBitArray([ 1, 1, 0, 1, 1, 0, 0, 0 ]);
 
-      expect(points[0].write).to.have.been.calledOnceWith(1);
-      expect(points[1].write).to.have.been.calledOnceWith(1);
-      expect(points[2].write).to.have.been.calledOnceWith(0);
-      expect(points[3].write).to.have.been.calledOnceWith(1);
-      expect(points[4].write).to.have.been.calledOnceWith(1);
-      expect(points[5].write).to.have.been.calledOnceWith(0);
-      expect(points[6].write).to.have.been.calledOnceWith(0);
-      expect(points[7].write).to.have.been.calledOnceWith(0);
+      expect(gpio[0].write).to.have.been.calledOnceWith(1);
+      expect(gpio[1].write).to.have.been.calledOnceWith(1);
+      expect(gpio[2].write).to.have.been.calledOnceWith(0);
+      expect(gpio[3].write).to.have.been.calledOnceWith(1);
+      expect(gpio[4].write).to.have.been.calledOnceWith(1);
+      expect(gpio[5].write).to.have.been.calledOnceWith(0);
+      expect(gpio[6].write).to.have.been.calledOnceWith(0);
+      expect(gpio[7].write).to.have.been.calledOnceWith(0);
     });
   });
 
@@ -89,25 +89,25 @@ describe('Display', () => {
     it('should clear the display', async () => {
       await display.clear();
 
-      expect(points[0].write).to.have.been.calledOnceWith(0);
-      expect(points[1].write).to.have.been.calledOnceWith(0);
-      expect(points[2].write).to.have.been.calledOnceWith(0);
-      expect(points[3].write).to.have.been.calledOnceWith(0);
-      expect(points[4].write).to.have.been.calledOnceWith(0);
-      expect(points[5].write).to.have.been.calledOnceWith(0);
-      expect(points[6].write).to.have.been.calledOnceWith(0);
-      expect(points[7].write).to.have.been.calledOnceWith(0);
+      expect(gpio[0].write).to.have.been.calledOnceWith(0);
+      expect(gpio[1].write).to.have.been.calledOnceWith(0);
+      expect(gpio[2].write).to.have.been.calledOnceWith(0);
+      expect(gpio[3].write).to.have.been.calledOnceWith(0);
+      expect(gpio[4].write).to.have.been.calledOnceWith(0);
+      expect(gpio[5].write).to.have.been.calledOnceWith(0);
+      expect(gpio[6].write).to.have.been.calledOnceWith(0);
+      expect(gpio[7].write).to.have.been.calledOnceWith(0);
     });
 
     it('should resolve', done => {
-      points[0].write.resolves();
-      points[1].write.resolves();
-      points[2].write.resolves();
-      points[3].write.resolves();
-      points[4].write.resolves();
-      points[5].write.resolves();
-      points[6].write.resolves();
-      points[7].write.resolves();
+      gpio[0].write.resolves();
+      gpio[1].write.resolves();
+      gpio[2].write.resolves();
+      gpio[3].write.resolves();
+      gpio[4].write.resolves();
+      gpio[5].write.resolves();
+      gpio[6].write.resolves();
+      gpio[7].write.resolves();
 
       display.clear().then(() => done());
     });
