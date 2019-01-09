@@ -2,7 +2,7 @@
   "name": "@kymera/core",
   "version": "1.0.0",
   "description": "Kymera core application",
-  "main": "src/kymera.js",
+  "main": "index.js",
   "bin": {
     "kymera": "bin/kymera"
   },
