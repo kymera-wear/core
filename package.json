@@ -4,7 +4,7 @@
   "description": "Kymera core application",
   "main": "index.js",
   "bin": {
-    "kymera": "bin/kymera"
+    "kymera": "bin/kymera.js"
   },
   "repository": "https://gitlab.com/chameleoid/kymera/core.git",
   "author": "*Kim Zick (rummik)",
@@ -28,6 +28,7 @@
   "dependencies": {
     "app-root-path": "^2.1.0",
     "liblouis": "^0.4.0",
-    "onoff": "^3.2.2"
+    "onoff": "^3.2.2",
+    "tinydate": "^1.2.0"
   }
 }
