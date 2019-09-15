@@ -17,9 +17,12 @@
   coreutils ? pkgs.coreutils,
   glibc ? pkgs.glibc,
   glibc32 ? pkgs.pkgsi686Linux.glibc,
+
+  node ? pkgs.nodejs-10_x,
 }:
 
 let
+
   fhs-init = writeScript "fhs-init" ''
     #! ${stdenv.shell}
     cd $FHS_PWD
@@ -40,25 +43,40 @@ let
       ln -s $out/lib${if is64bit then "64" else "32"} $out/lib
     '';
   };
-in
-  mkShell rec {
-    buildInputs = with pkgs;
-      atomEnv.packages ++
-      [
-        libuv
-        v8
-        gtk3-x11
-        at-spi2-atk
-        nodejs-8_x
-        (yarn.override { nodejs = nodejs-8_x; })
-      ];
 
-    shellHook = ''
-      export PATH="$PWD/node_modules/.bin/:$PATH"
-      export NODE_ENV=development
-      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${makeLibraryPath buildInputs}
-      export FHS_PWD=$PWD
-      export CXXFLAGS=-I${pkgs.nodejs-8_x}/include/node
-      exec ${chrootenv} ${fhs-init}
-    '';
-  }
+in
+
+mkShell rec {
+  buildInputs = with pkgs;
+    atomEnv.packages ++
+    [
+      libuv
+      v8
+      gtk3-x11
+      at-spi2-atk
+
+      node
+      (yarn.override { nodejs = node; })
+
+      gitlab-runner
+    ];
+
+  shellHook = ''
+    export PATH="$PWD/node_modules/.bin/:$PATH"
+    export NODE_ENV=development
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${makeLibraryPath buildInputs}
+    export FHS_PWD=$PWD
+    export CXXFLAGS=-I${pkgs.nodejs-10_x}/include/node
+    exec ${chrootenv}/bin/chrootenv ${fhs-init}
+  '';
+}
+
+/*{ pkgs ? import <nixpkgs> {} }:
+
+pkgs.mkShell {
+  mergeInputs = with pkgs; [
+    nodejs-10_x
+    (yarn.override { nodejs = nodejs-10_x; })
+    gitlab-runner
+  ];
+}*/
